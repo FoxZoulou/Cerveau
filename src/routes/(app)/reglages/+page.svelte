@@ -2,8 +2,9 @@
 	import { onMount } from 'svelte';
 	import Header from '$lib/components/Header.svelte';
 	import PushToggle from '$lib/components/PushToggle.svelte';
+	import { enhance } from '$app/forms';
 
-	let { data } = $props();
+	let { data, form } = $props();
 	let theme = $state<'system' | 'light' | 'dark'>('system');
 
 	onMount(() => {
@@ -50,6 +51,27 @@
 		<button class="btn-soft w-full" type="submit">Se déconnecter</button>
 	</form>
 </div>
+
+<h2 class="section-title mb-2">Mot de passe</h2>
+<form method="POST" action="?/password" use:enhance class="card mb-5 space-y-3 p-3">
+	<div>
+		<label class="label" for="current">Mot de passe actuel</label>
+		<input class="input" id="current" name="current" type="password" autocomplete="current-password" required />
+	</div>
+	<div class="grid grid-cols-2 gap-2">
+		<div>
+			<label class="label" for="next">Nouveau</label>
+			<input class="input" id="next" name="next" type="password" autocomplete="new-password" minlength="8" required />
+		</div>
+		<div>
+			<label class="label" for="confirm">Confirmer</label>
+			<input class="input" id="confirm" name="confirm" type="password" autocomplete="new-password" minlength="8" required />
+		</div>
+	</div>
+	{#if form?.error}<p class="text-sm text-danger">{form.error}</p>{/if}
+	{#if form?.passwordChanged}<p class="text-sm text-accent">Mot de passe modifié. Vos autres appareils devront se reconnecter.</p>{/if}
+	<button class="btn-primary w-full" type="submit">Changer le mot de passe</button>
+</form>
 
 <h2 class="section-title mb-2">Installer l'application</h2>
 <div class="card p-3 text-sm text-ink-2">
