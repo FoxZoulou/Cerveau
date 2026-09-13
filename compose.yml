@@ -1,0 +1,17 @@
+services:
+  app:
+    build: .
+    image: second-cerveau:latest
+    restart: unless-stopped
+    ports:
+      # Lié à localhost : c'est nginx (HTTPS, filtrage IP) qui expose l'app.
+      - '127.0.0.1:${PORT:-3000}:3000'
+    environment:
+      # URL publique (obligatoire : cookies, CSRF, liens d'invitation)
+      ORIGIN: ${ORIGIN:-http://localhost:3000}
+      APP_NAME: ${APP_NAME:-Second cerveau}
+      TZ: ${TZ:-Europe/Paris}
+      VAPID_CONTACT: ${VAPID_CONTACT:-mailto:admin@example.com}
+    volumes:
+      # Base SQLite, pièces jointes et clés VAPID : à sauvegarder.
+      - ./data:/data

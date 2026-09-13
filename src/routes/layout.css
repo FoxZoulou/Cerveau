@@ -1,0 +1,112 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+	--color-bg: #f6f5f2;
+	--color-surface: #ffffff;
+	--color-surface-2: #f0eeea;
+	--color-line: #e5e2dc;
+	--color-ink: #1c1917;
+	--color-ink-2: #57534e;
+	--color-ink-3: #a8a29e;
+	--color-accent: #0f766e;
+	--color-accent-ink: #ffffff;
+	--color-accent-soft: #ccfbf1;
+	--color-danger: #b91c1c;
+	--color-danger-soft: #fee2e2;
+	--color-warn: #b45309;
+	--color-warn-soft: #fef3c7;
+}
+
+.dark {
+	--color-bg: #141210;
+	--color-surface: #1f1c19;
+	--color-surface-2: #2a2622;
+	--color-line: #38332e;
+	--color-ink: #f5f3ef;
+	--color-ink-2: #b8b1a8;
+	--color-ink-3: #736c64;
+	--color-accent: #2dd4bf;
+	--color-accent-ink: #042f2e;
+	--color-accent-soft: #134e4a;
+	--color-danger: #f87171;
+	--color-danger-soft: #450a0a;
+	--color-warn: #fbbf24;
+	--color-warn-soft: #451a03;
+}
+
+html {
+	background: var(--color-bg);
+	color: var(--color-ink);
+	-webkit-tap-highlight-color: transparent;
+	overscroll-behavior-y: none;
+}
+
+body {
+	min-height: 100dvh;
+}
+
+/* Zones sûres iOS (encoche, barre home) */
+.pb-safe {
+	padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.pt-safe {
+	padding-top: env(safe-area-inset-top, 0px);
+}
+
+@utility card {
+	@apply bg-surface border border-line rounded-2xl;
+}
+@utility btn {
+	@apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition active:scale-[0.98] disabled:opacity-50;
+}
+@utility btn-primary {
+	@apply btn bg-accent text-accent-ink hover:brightness-110;
+}
+@utility btn-ghost {
+	@apply btn bg-transparent text-ink-2 hover:bg-surface-2;
+}
+@utility btn-soft {
+	@apply btn bg-surface-2 text-ink hover:brightness-95;
+}
+@utility btn-danger {
+	@apply btn bg-danger-soft text-danger;
+}
+/* Bouton icône seule : zone tactile de 44 px quelle que soit la taille de l'icône */
+@utility btn-icon {
+	@apply btn-ghost h-11 w-11 p-0 shrink-0;
+}
+/* Ligne défilante horizontalement : fondu à droite pour signaler la suite */
+@utility scroll-fade {
+	mask-image: linear-gradient(to right, black calc(100% - 2.5rem), transparent);
+}
+@utility input {
+	@apply w-full rounded-xl border-line bg-surface text-ink placeholder:text-ink-3 focus:border-accent focus:ring-accent/30 text-base;
+}
+@utility label {
+	@apply block text-xs font-medium text-ink-2 mb-1;
+}
+@utility chip {
+	@apply inline-flex items-center gap-1 rounded-full px-3 py-1.5 min-h-9 text-xs font-medium bg-surface-2 text-ink-2 whitespace-nowrap;
+}
+@utility chip-active {
+	@apply bg-accent text-accent-ink;
+}
+@utility section-title {
+	@apply text-xs font-semibold uppercase tracking-wide text-ink-3 px-1;
+}
+/* Cases à cocher rondes façon app de tâches */
+@utility check {
+	@apply h-6 w-6 shrink-0 rounded-full border-2 border-ink-3 bg-transparent text-accent transition;
+}
+/* Zone tactile 44 px autour du cercle de 24 px, sans changer le rendu */
+@utility check-hit {
+	@apply grid h-11 w-11 -m-2.5 shrink-0 place-items-center;
+}
+.check:checked {
+	@apply border-accent bg-accent;
+}

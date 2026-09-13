@@ -1,0 +1,21 @@
+{
+	"name": "Second cerveau",
+	"short_name": "Cerveau",
+	"description": "Le deuxième cerveau du foyer : tâches, listes, notes, agenda, procédures.",
+	"lang": "fr",
+	"start_url": "/",
+	"scope": "/",
+	"display": "standalone",
+	"background_color": "#f6f5f2",
+	"theme_color": "#0f766e",
+	"icons": [
+		{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+		{ "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+		{ "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+	],
+	"shortcuts": [
+		{ "name": "Inbox", "url": "/inbox" },
+		{ "name": "Listes", "url": "/listes" },
+		{ "name": "Agenda", "url": "/agenda" }
+	]
+}
